@@ -79,6 +79,43 @@ export const STREAM_PROVIDERS: StreamProvider[] = [
       return null;
     },
   },
+  {
+    id: 'videasy',
+    name: 'Videasy',
+    getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
+    const base =  `https://player.videasy.net/embed`,
+    if (type === 'movie') {
+        if (imdbId) return `${base}?imdb=${imdbId}`;
+        return `${base}?tmdb=${tmdbId}`; // Fallback to TMDB if IMDB ID is missing
+      }
+      if (type === 'tv' && season != null && episode != null) {
+        return `${base}?type=series&tmdb=${tmdbId}&season=${season}&episode=${episode}`;
+      }
+      return null;
+    },
+  },
+  {
+    id: 'vidsrccc',
+    name: 'VidSrc.cc',
+    getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
+      const base = 'https://vidsrc.cc/v2/embed';
+      if (type === 'movie') return `${base}/movie?tmdb=${tmdbId}`;
+      if (type === 'tv' && season != null && episode != null)
+        return `${base}/tv?tmdb=${tmdbId}&season=${season}&episode=${episode}`;
+      return null;
+    },
+  },
+{
+    id: 'vidlink',
+    name: 'VidLink',
+    getUrl: ({ type, tmdbId, imdbId, season, episode }) => {
+      const base = 'https://vidlink.pro/embed`;
+  if (type === 'movie') return `${base}/movie?tmdb=${tmdbId}`;
+      if (type === 'tv' && season != null && episode != null)
+        return `${base}/tv?tmdb=${tmdbId}&season=${season}&episode=${episode}`;
+      return null;
+    },
+  }
 ];
 
 export const DEFAULT_PROVIDER_ID = 'vidsrc';
